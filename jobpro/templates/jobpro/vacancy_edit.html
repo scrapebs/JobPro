@@ -1,0 +1,29 @@
+{% extends 'jobpro/base.html' %}
+
+{% block content %}
+	<h1>New vacancy</h1>
+	<form method="POST" class="post-form">
+		{% csrf_token %}
+		<table>
+		<tr>
+            <td>{{ form.profession.label_tag }}</td>
+			<td>{{ form.profession }}</td>
+		</tr>	
+        <tr>
+            <td>{{ form.name.label_tag }}</td>
+			<td>{{ form.name }}</td>
+		</tr>
+		<tr>
+			<td>{{ form.description.label_tag }}</td>
+			<td>{{ form.description }}</td>
+		</tr>
+		<tr>
+			<td>{{ form.salary.label_tag }}</td>
+			<td>{{ form.salary }}</td>
+		</tr>
+		<tr>
+			<td><button type="submit" class="save btn btn-default">Save </button></td>
+		</tr>
+		
+	</form>
+{% endblock %}	

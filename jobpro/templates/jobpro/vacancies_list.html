@@ -1,0 +1,36 @@
+{% extends 'jobpro/base.html' %}
+
+{% block content %}
+	  <div class="page-header">
+            <div class = "up-wrapper">
+                  <ul>
+                    <li><a style="font-size:19px;" href="/">Вакансии</a></li>
+                    <li><a style="font-size:19px;" href="/">Резюме</a></li>
+        
+                   </ul>
+                </div>
+            {% if user.is_authenticated %}
+                {% block menu %}    
+                {% endblock %}
+                <a href="{% url 'logout' %}"><img style="height: 35px; " class="top-menu" src="https://s8.hostingkartinok.com/uploads/images/2018/02/c08de10646e500d694b31bb05b345fa3.png"></a> 
+                <a href="{% url 'vacancy_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                {% if user.username == "dd" %}
+                    <a href="{% url 'vacancies_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                {% endif %}
+
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            {% endif %}
+            
+    </div>
+	<div class="vacancy">
+		{% for vacancy in vacancies %}
+	            
+
+	            <h1><a href="{% url 'vacancy_detail' pk=vacancy.pk %}">{{ vacancy.name }}</a></h1>
+	            <p>{{ vacancy.description }}</p>
+	            <p>ЗП: {{ vacancy.salary }}</p>
+	            
+	    {% endfor %}
+	</div>
+{% endblock %}

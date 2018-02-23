@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load javascript_settings_tags %}
+<script type="text/javascript">{% javascript_settings %}</script>
+<html>
+    <head>
+        <title>Storm Cases</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/jobpro.css' %}">
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+        <script>
+            {% block javascript %}
+            {% endblock %}
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            {% if user.is_authenticated %}
+                <a class="logo" href="{% url 'index' %}">Industrious</a>
+                <nav>
+                    <a href="{% url 'my_vacancies_list' %}"><img class="round" src="https://s8.hostingkartinok.com/uploads/images/2018/02/939437d496b6a750f080f3b532f413ef.png"></a>
+                </nav>
+            {% else %}
+                <a class="logo" href="{% url 'index' %}">Industrious</a>
+                <nav>
+                    <a href="{% url 'login' %}"><img class="round" src="https://s8.hostingkartinok.com/uploads/images/2018/02/939437d496b6a750f080f3b532f413ef.png"></a>
+                </nav>
+            {% endif %}    
+        </header>
+
+
+                {% block content %}
+                {% endblock %}
+           
+
+    </body>
+</html>
