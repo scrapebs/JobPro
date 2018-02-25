@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import User, Vacancy, Cv
+from .models import User, Vacancy, Cv, OrgInfo
 #from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth.models import Group
@@ -18,6 +18,13 @@ class CvForm(forms.ModelForm):
     class Meta:
         model = Cv
         fields = ('name', 'description')
+
+
+class OrgInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = OrgInfo
+        fields = ('name', 'address', 'phone', 'email', 'description')
 
 
 class UserCreationForm(forms.ModelForm):

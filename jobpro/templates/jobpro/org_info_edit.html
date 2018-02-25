@@ -1,0 +1,34 @@
+{% extends 'jobpro/base.html' %}
+<div class="edit">
+{% block content %}
+	<h1>Ваша организация</h1>
+	<form method="POST" class="post-form">
+		{% csrf_token %}
+		<table>
+            <td>Название вашей организации</td>
+			<td>{{ form.name }}</td>
+		</tr>
+		<tr>
+			<td>Адрес организации</td>
+			<td>{{ form.address }}</td>
+		</tr>
+		<tr>
+			<td>Контактный телефон</td>
+			<td>{{ form.phone }}</td>
+		</tr>
+		<tr>
+			<td>Контактный email</td>
+			<td>{{ form.email }}</td>
+		</tr>
+		<tr>
+			<td>Описание организации</td>
+			<td>{{ form.description }}</td>
+		</tr>
+		<tr>
+			<td><button type="submit" class="save btn btn-default">Save </button></td>
+		</tr>
+	</table>
+		
+	</form>
+{% endblock %}	
+</div>

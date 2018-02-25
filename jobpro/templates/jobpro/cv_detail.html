@@ -29,7 +29,7 @@
     {% if user.is_authenticated %}
     <div class="page-header">
         
-            {% if not is_organisation %}        
+            {% if user.account_type == 'EM' %}        
                 {% if is_owner %}
                     <a href="{% url 'cv_edit' pk=cv.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
                 {% endif %}

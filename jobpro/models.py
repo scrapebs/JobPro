@@ -96,7 +96,7 @@ class Vacancy(models.Model):
     	return self.name
 
 
-class Favourite_vacancy(models.Model):
+class FavouriteVacancy(models.Model):
     user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_vacancy', on_delete=models.CASCADE)
     vacancy = models.ForeignKey('jobpro.Vacancy', on_delete=models.CASCADE)
 
@@ -117,9 +117,23 @@ class Cv(models.Model):
         return  self.name
         
 
-class Favourite_cv(models.Model):
+class FavouriteCv(models.Model):
     user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_cv', on_delete=models.CASCADE)
     cv = models.ForeignKey('jobpro.Cv', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username + '->' + self.cv.name
+
+
+class OrgInfo(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=150)
+    phone = models.CharField(max_length=40)
+    email = models.CharField(max_length=40)
+    description = models.TextField()
+    created_date = models.DateTimeField(blank = True, null = True)
+    actual = models.BooleanField(default = True)
+    organisation = models.ForeignKey(auth.get_user_model(), related_name='info', on_delete=models.CASCADE, null = True)
+
+    def __str__(self):
+        return  self.name

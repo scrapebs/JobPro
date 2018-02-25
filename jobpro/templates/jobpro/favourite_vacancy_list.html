@@ -1,11 +1,24 @@
 {% extends 'jobpro/base.html' %}
 
 {% block content %}
+	 {% if user.account_type == 'OR' %} 
+	    <div class="page-header">
+      
+                {% block menu %}    
+                {% endblock %}
+                <a href="{% url 'vacancy_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
+        </div>
+    {% endif %}
 	<div class="vacancy">
+		<h1>Избранные вакансии</h1>
 		{% for favourite in favourite_vacancies %}
 	            
 	            <h1><a href="{% url 'vacancy_detail' pk=favourite.vacancy.pk %}">{{ favourite.vacancy.name }}</a></h1>
-	            <p>{{ favourite.vacancy.description }}</p>            
+	            <p>Описание вакансии:<pre class="description">  {{ favourite.vacancy.description }}</pre></p>   
+	            <p>Зарплата: {{ favourite.vacancy.salary }}</p>
+                <a href="{% url 'org_info_vacancy' owner_pk=favourite.vacancy.owner.pk %}" >Автор вакансии: {{ favourite.vacancy.owner }}</a>
+	            <hr align="center" width="700px" size="2" color=grey />       
 	    {% endfor %}
 	</div>
 {% endblock %}

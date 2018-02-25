@@ -1,0 +1,21 @@
+{% extends 'jobpro/base.html' %}
+
+{% block javascript %}       
+{% endblock %}
+
+{% block content %}
+	{% if user.is_authenticated and is_owner %}
+    	<div class="page-header">
+            <a href="{% url 'org_info_edit' pk=org_info.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>       
+    	</div>
+    {% endif %}
+   
+    <div class="vacancy">
+    	<h1>{{ org_info.name }}</h1>
+    	<p>Адрес: {{ org_info.address }}</p>
+        <p>Контактный телефон: {{ org_info.phone }}</p>
+        <p>Контактный email: {{ org_info.email }}</p>
+        <p>Об организации: {{ org_info.description }}</p>
+    </div>
+
+{% endblock %}

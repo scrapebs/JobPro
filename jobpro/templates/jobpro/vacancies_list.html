@@ -1,7 +1,7 @@
 {% extends 'jobpro/base.html' %}
 
 {% block content %}
-    {% if is_organisation %}
+    {% if user.account_type == 'OR' %} 
 	    <div class="page-header">
       
                 {% block menu %}    
@@ -10,19 +10,22 @@
 
         </div>
     {% endif %}
+
 	<div class="vacancy">
+        <h1>Все вакансии</h1>
 		{% for vacancy in vacancies %}
 	            
 
 	            <h1><a href="{% url 'vacancy_detail' pk=vacancy.pk %}">{{ vacancy.name }}</a></h1>
-	            <p>{{ vacancy.description }}</p>
-	            <p>ЗП: {{ vacancy.salary }}</p>
-                <p>{{ vacancy.owner }}</p>
+	            <p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
+	            <p>Зарплата: {{ vacancy.salary }}</p>
+                <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.owner }}</a>
                 {% if is_authenticated and not is_organisation %}
                     {% if '2' in '1,2,3' %}
                          <img id ='save' src="http://imagestun.com/hosting/prev/star3.png" height="22px" onclick = "favourite();" class="top-menu">  
                     {% endif %}
                 {% endif %}
+                <hr align="center" width="700px" size="2" color=grey />
 	            
 	    {% endfor %}
 	</div>

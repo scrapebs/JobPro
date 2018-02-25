@@ -29,7 +29,7 @@
     {% if user.is_authenticated %}
     <div class="page-header">
         
-            {% if is_organisation %}        
+            {% if user.account_type == 'OR' %}       
                 {% if is_owner %}
                     <a href="{% url 'vacancy_edit' pk=vacancy.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
                 {% endif %}
@@ -49,9 +49,9 @@
     {% endif %}
     <div class="vacancy">
     	<h1>{{ vacancy.name }}</h1>
-    	<p>{{ vacancy.description }}</p>
-    	<p>ЗП: {{ vacancy.salary }}</p>
-        <p>{{ vacancy.owner }}</p>
+    	<p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
+    	<p>Зарплата: {{ vacancy.salary }}</p>
+        <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.owner }}</a>
     </div>
 
 {% endblock %}
