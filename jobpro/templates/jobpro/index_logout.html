@@ -1,0 +1,100 @@
+{% load staticfiles %}
+{% load javascript_settings_tags %}
+<script type="text/javascript">{% javascript_settings %}</script>
+
+
+<html>
+	<head>
+		<title>Job Pro</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="{% static 'css/jobpro.css' %}">
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+		<header id="header">
+            <a class="logo" href="{% url 'index' %}">Job Pro</a>
+          	<div class = "login">
+				<a href="{% url 'login' %}">Sign in</a>or
+				<a href="{% url 'registration_register' %}">Sign up</a>
+			</div>
+        </header>
+
+
+		<!-- Banner -->
+			<section id="banner" style="background-image: url('https://s8.hostingkartinok.com/uploads/images/2018/02/7aedc8b17e55f51d2e26710ef21abfc9.jpg');">
+				<div class="sign">
+					<h1>Job Pro</h1>
+					<p>Найди здесь интересную вакансию или<br />
+					 Размести резюме и работодатели найдут тебя</p>
+				</div>
+			</section>
+
+		<!-- Highlights -->
+			
+				<div class="inner">
+					<div class="highlights">
+							<section>
+							<div class="content">
+								<header>
+									<a href="{% url 'vacancies_list'%}" ><img height= 170px; src="https://s8.hostingkartinok.com/uploads/images/2018/02/9f5fe02ede1eaf528e20fa0b1a67b503.png"></a>
+									<h3>Найти работу</h3>
+								</header>
+								<p>Nunc lacinia ante nunc ac lobortis ipsum.</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<a href="#" ><img height= 170px; src="https://s8.hostingkartinok.com/uploads/images/2018/02/96eeb5f2024bb65b5f182b211a29025f.png"></a>
+									<h3>Найти сотрудников</h3>
+								</header>
+								<p> Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header> 
+									<a href="{% url 'registration_register' %}" ><img height= 170px; src="https://s8.hostingkartinok.com/uploads/images/2018/02/18e596b562f707b99bd7f199c64a784f.png"></a>
+									<h3>Избранное</h3>
+								</header>
+								<p>Nunc lacinia ante nunc ac lobortis ipsum.</p>
+							</div>
+						</section>
+					</div>
+				</div>
+		
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="content">
+						<section>
+							<h3>Accumsan montes viverra</h3>
+							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat .</p>
+						</section>
+						<section>
+							<h4>Sem turpis amet semper</h4>
+							<ul class="alt">
+								<li><a href="#">Felis enim feugiat viverra.</a></li>
+								<li><a href="#">Dolor pulvinar magna etiam.</a></li>
+							</ul>
+						</section>
+						<section>
+							<h4>Magna sed ipsum</h4>
+							<ul class="plain">
+								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
+								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
+								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+							</ul>
+						</section>
+					</div>
+
+				</div>
+			</footer>
+			
+	</body>
+</html>

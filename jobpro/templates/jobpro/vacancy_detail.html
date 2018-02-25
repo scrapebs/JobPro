@@ -2,20 +2,20 @@
 
 {% block javascript %}
     function favourite() {
-                var Vacancy = "{{ vacancy }}"
+                var Vacancy_pk = "{{ vacancy.pk }}"
                 $.ajax({
                     type:"POST",
                     url: "{% url 'vacancy_favourite_change' %}", 
                     cache: false,
                     data: {
-                        "Vacancy": Vacancy, 'csrfmiddlewaretoken':"{{ csrf_token }}"
+                        "Vacancy_pk": Vacancy_pk, 'csrfmiddlewaretoken':"{{ csrf_token }}"
                     },
                     success: function(data) {
                          if (data == 'add'){
-                            document.getElementById('save').value='Убрать из избранного'
+                            document.getElementById('save').src='http://imagestun.com/hosting/prev/star3.png'
                         }
                         if (data == 'remove'){
-                            document.getElementById('save').value='В избранное'
+                            document.getElementById('save').src='http://imagestun.com/hosting/prev/star2.png'
                         }
                     },
                     failure: function(data) { 
@@ -23,28 +23,37 @@
                     }
                 });
             }
-
-{% endblock %}
-{% block menu %}  
         
 {% endblock %}
 {% block content %}
-    <p>{{ vacancy.profession }}</p>
-	<h1>{{ vacancy.name }}</h1>
-	<p>{{ vacancy.description }}</p>
-	<p>ЗП: {{ vacancy.salary }}</p>
-	<form method="POST">
-		 {% csrf_token %}
-   		 {{ form.as_p }}
-   		 {% if is_favourite == False %}
-		 	<input id="save" type="button" value="В избранное" onclick = "favourite();"/>
-		 {% else %}
-			<input id="save" type="button" value="Убрать из избранного" onclick = "favourite();"/>
-		 {% endif %}
-         {% if is_owner %}
-            <a class="btn btn-default" href="{% url 'vacancy_edit' pk=vacancy.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>  
-            <a class="btn btn-default" href="{% url 'vacancy_remove' pk=vacancy.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-         {% endif %}
-   	</form>
+    {% if is_authenticated %}
+    <div class="page-header">
+        
+            {% if is_organisation %}        
+                {% if is_owner %}
+                    <a href="{% url 'vacancy_edit' pk=vacancy.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="{% url 'vacancy_new' %}" class="top-menu"><img src="http://imagestun.com/hosting/prev/star2.png" height="22px"></a> 
+                    <input id="save" type="button" value="В избранное" onclick = "favourite();"/>
+                {% endif %}
+            {% else %}
+                <form method="POST">
+                     {% csrf_token %}
+                     {{ form.as_p }}
+                     {% if is_favourite == False %}
+                        <img id ='save' src="http://imagestun.com/hosting/prev/star2.png" height="22px" onclick = "favourite();" class="top-menu">                  
+                     {% else %}
+                        <img id ='save' src="http://imagestun.com/hosting/prev/star3.png" height="22px" onclick = "favourite();" class="top-menu">  
+                     {% endif %}
+                </form>
+            {% endif %}
+          
+    </div>
+    {% endif %}
+    <div class="vacancy">
+    	<h1>{{ vacancy.name }}</h1>
+    	<p>{{ vacancy.description }}</p>
+    	<p>ЗП: {{ vacancy.salary }}</p>
+        <p>{{ vacancy.owner }}</p>
+    </div>
 
 {% endblock %}
