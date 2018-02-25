@@ -1,13 +1,14 @@
 from django.contrib import admin
-from .models import Vacancy, Favourite #, Profile
+from .models import User, Vacancy, Favourite_vacancy, Cv, Favourite_cv
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 admin.site.register(Vacancy)
-admin.site.register(Favourite)
+admin.site.register(Favourite_vacancy)
+admin.site.register(Cv)
+admin.site.register(Favourite_cv)
 #admin.site.register(Profile)
 
 

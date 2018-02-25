@@ -1,25 +1,16 @@
 {% extends 'jobpro/base.html' %}
 <div class="edit">
 {% block content %}
-	<h1>Ваша вакансия</h1>
+	<h1>Ваше Резюме</h1>
 	<form method="POST" class="post-form">
 		{% csrf_token %}
 		<table>
-		<tr>
-            <td>Сфера деятельности</td>
-			<td>{{ form.profession }}</td>
-		</tr>	
-        <tr>
-            <td>Название вакансии</td>
+            <td>Ваше ФИО</td>
 			<td>{{ form.name }}</td>
 		</tr>
 		<tr>
-			<td>Описание вакансии</td>
+			<td>Опишите ваши навыки</td>
 			<td>{{ form.description }}</td>
-		</tr>
-		<tr>
-			<td>Зарплата</td>
-			<td>{{ form.salary }}</td>
 		</tr>
 		<tr>
 			<td><button type="submit" class="save btn btn-default">Save </button></td>

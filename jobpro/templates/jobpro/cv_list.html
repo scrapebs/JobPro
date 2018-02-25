@@ -1,0 +1,14 @@
+{% extends 'jobpro/base.html' %}
+
+{% block content %}
+
+	<div class="vacancy">
+		{% for cv in cvs %}
+	            
+	            <h1><a href="{% url 'cv_detail' pk=cv.pk %}">{{ cv.name }}</a></h1>
+	            <p>{{ cv.description }}</p>
+	            
+	    {% endfor %}
+	</div>
+
+{% endblock %}

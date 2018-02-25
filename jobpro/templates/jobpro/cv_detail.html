@@ -2,13 +2,13 @@
 
 {% block javascript %}
     function favourite() {
-                var Vacancy_pk = "{{ vacancy.pk }}"
+                var Cv_pk = "{{ cv.pk }}"
                 $.ajax({
                     type:"POST",
-                    url: "{% url 'vacancy_favourite_change' %}", 
+                    url: "{% url 'cv_favourite_change' %}", 
                     cache: false,
                     data: {
-                        "Vacancy_pk": Vacancy_pk, 'csrfmiddlewaretoken':"{{ csrf_token }}"
+                        "Cv_pk": Cv_pk, 'csrfmiddlewaretoken':"{{ csrf_token }}"
                     },
                     success: function(data) {
                          if (data == 'add'){
@@ -29,9 +29,9 @@
     {% if user.is_authenticated %}
     <div class="page-header">
         
-            {% if is_organisation %}        
+            {% if not is_organisation %}        
                 {% if is_owner %}
-                    <a href="{% url 'vacancy_edit' pk=vacancy.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="{% url 'cv_edit' pk=cv.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
                 {% endif %}
             {% else %}
                 <form method="POST">
@@ -48,10 +48,8 @@
     </div>
     {% endif %}
     <div class="vacancy">
-    	<h1>{{ vacancy.name }}</h1>
-    	<p>{{ vacancy.description }}</p>
-    	<p>ЗП: {{ vacancy.salary }}</p>
-        <p>{{ vacancy.owner }}</p>
+    	<h1>{{ cv.name }}</h1>
+    	<p>{{ cv.description }}</p>
     </div>
 
 {% endblock %}

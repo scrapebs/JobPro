@@ -1185,6 +1185,7 @@ body {
 .submenu ul li a
 {
     color:111111;
+    font-size: 6px;
     padding: 0 15px;
     margin: 0;
     text-decoration: none;

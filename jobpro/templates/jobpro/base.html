@@ -22,13 +22,23 @@
                     <a class="logo" href="{% url 'index' %}">Job Pro</a>
                     <div class = "mainmenu">
                         {{ user.username }} {{ user.profile.account_type }} <img class="round" src="https://s8.hostingkartinok.com/uploads/images/2018/02/939437d496b6a750f080f3b532f413ef.png">
-                        <div class = 'submenu'>
-                            <ul> 
-                                      <li><a href="#">Моё резюме</a></li> 
-                                      <li><a href="{% url 'vacancy_favourite_list' %}">Избранные вакансии</a></li> 
-                                      <li><a href="{% url 'logout' %}">Выход</a></li> 
-                            </ul> 
-                        </div> 
+                        {% if is_organisation %} 
+                            <div class = 'submenu'>
+                                <ul> 
+                                          <li><a href="{% url 'cv_my' %}">Инф о работодателе</a></li> 
+                                          <li><a href="{% url 'cv_favourite_list' %}">Избранные резюме</a></li> 
+                                          <li><a href="{% url 'logout' %}">Выход</a></li> 
+                                </ul> 
+                            </div>
+                        {% else %}
+                            <div class = 'submenu'>
+                                <ul> 
+                                          <li><a href="{% url 'cv_my' %}">Моё резюме</a></li> 
+                                          <li><a href="{% url 'vacancy_favourite_list' %}">Избранные вакансии</a></li> 
+                                          <li><a href="{% url 'logout' %}">Выход</a></li> 
+                                </ul> 
+                            </div> 
+                        {% endif %}
                     </div>
                 {% else %}
                     <a class="logo" href="{% url 'index' %}">Job Pro</a>

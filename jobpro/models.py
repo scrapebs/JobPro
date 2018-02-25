@@ -96,8 +96,8 @@ class Vacancy(models.Model):
     	return self.name
 
 
-class Favourite(models.Model):
-    user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite', on_delete=models.CASCADE)
+class Favourite_vacancy(models.Model):
+    user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_vacancy', on_delete=models.CASCADE)
     vacancy = models.ForeignKey('jobpro.Vacancy', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -107,11 +107,19 @@ class Favourite(models.Model):
 #    owner =  models.ForeignKey(auth.get_user_model(), related_name = 'favourite', on_delete=models.CASCADE)
 
 class Cv(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     description = models.TextField()
     created_date = models.DateTimeField(blank = True, null = True)
     actual = models.BooleanField(default = True)
+    owner = models.ForeignKey(auth.get_user_model(), related_name='cv', on_delete=models.CASCADE, null = True)
 
     def __str__(self):
-        return self.pk + ' ' + self.name
+        return  self.name
         
+
+class Favourite_cv(models.Model):
+    user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_cv', on_delete=models.CASCADE)
+    cv = models.ForeignKey('jobpro.Cv', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username + '->' + self.cv.name
