@@ -4,11 +4,13 @@
 {% endblock %}
 
 {% block content %}
+	<div class="page-header">
 	{% if user.is_authenticated and is_owner %}
-    	<div class="page-header">
+    	
             <a href="{% url 'org_info_edit' pk=org_info.pk %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>       
-    	</div>
+    	
     {% endif %}
+    </div>
    
     <div class="vacancy">
     	<h1>{{ org_info.name }}</h1>

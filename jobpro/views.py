@@ -136,7 +136,7 @@ def vacancy_favourite_list(request):
 @user_passes_test(is_organisation)
 def my_vacancies_list(request):
 	vacancies = Vacancy.objects.filter(owner = request.user)
-	return render(request, 'jobpro/vacancies_list.html',{'vacancies': vacancies})
+	return render(request, 'jobpro/vacancies_list.html',{'vacancies': vacancies, 'description': 'Ваши вакансии'}, )
 
 
 def cv_list(request):
@@ -157,10 +157,9 @@ def cv_detail(request, pk):
 	if request.user.is_authenticated:
 		if request.user.account_type=='OR':
 			is_organisation = True
+			is_favourite = FavouriteCv.objects.filter(user=request.user, cv=cv).exists()
 		elif cv.owner == User.objects.get(username = request.user):
-			is_owner = True 
-		else:
-			is_favourite = FavouriteCv.objects.filter(user=request.user, cv=cv).exists()			
+			is_owner = True 						
 	return render(request, 'jobpro/cv_detail.html', {'cv': cv, 'is_organisation': is_organisation, 'is_favourite': is_favourite, 'is_owner': is_owner})
 
 

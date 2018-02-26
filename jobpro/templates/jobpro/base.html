@@ -1,6 +1,4 @@
 {% load staticfiles %}
-{% load javascript_settings_tags %}
-<script type="text/javascript">{% javascript_settings %}</script>
 <html>
     <head>
         <title>Job Pro</title>
@@ -44,8 +42,8 @@
                 {% else %}
                     <a class="logo" href="{% url 'index' %}">Job Pro</a>
                     <div class = "login">
-                        <a href="{% url 'login' %}">Sign in</a>or
-                        <a href="{% url 'registration_register' %}">Sign up</a>
+                        <a href="{% url 'login' %}">Войти</a>или
+                        <a href="{% url 'registration_register' %}">Зарегистрироваться</a>
                     </div>
                 {% endif %}    
             </header>

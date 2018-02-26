@@ -26,8 +26,9 @@
         
 {% endblock %}
 {% block content %}
+<div class="page-header">
     {% if user.is_authenticated %}
-    <div class="page-header">
+    
         
             {% if user.account_type == 'EM' %}        
                 {% if is_owner %}
@@ -45,8 +46,9 @@
                 </form>
             {% endif %}
           
-    </div>
+ 
     {% endif %}
+</div>
     <div class="vacancy">
     	<h1>{{ cv.name }}</h1>
     	<p>{{ cv.description }}</p>

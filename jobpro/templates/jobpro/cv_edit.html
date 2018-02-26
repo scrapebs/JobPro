@@ -1,6 +1,7 @@
 {% extends 'jobpro/base.html' %}
-<div class="edit">
+
 {% block content %}
+<div class="vacancy">
 	<h1>Ваше Резюме</h1>
 	<form method="POST" class="post-form">
 		{% csrf_token %}
@@ -12,11 +13,9 @@
 			<td>Опишите ваши навыки</td>
 			<td>{{ form.description }}</td>
 		</tr>
-		<tr>
-			<td><button type="submit" class="save btn btn-default">Save </button></td>
-		</tr>
 	</table>
-		
+	<button type="submit" class='simple-button'>Save </button>	
 	</form>
-{% endblock %}	
 </div>
+{% endblock %}	
+

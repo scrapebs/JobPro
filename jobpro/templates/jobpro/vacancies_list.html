@@ -1,33 +1,40 @@
 {% extends 'jobpro/base.html' %}
 
 {% block content %}
+<div class="page-header">
     {% if user.account_type == 'OR' %} 
-	    <div class="page-header">
+	    
       
                 {% block menu %}    
                 {% endblock %}
                 <a href="{% url 'vacancy_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
-        </div>
+        
     {% endif %}
-
+    </div>
 	<div class="vacancy">
-        <h1>Все вакансии</h1>
-		{% for vacancy in vacancies %}
-	            
+        {% if description %}
+            <h1>{{ description }}</h1>
+        {% else %}
+            <h1>Все вакансии</h1>
+        {% endif %}
+    		{% for vacancy in vacancies %}
+    	            
 
-	            <h1><a href="{% url 'vacancy_detail' pk=vacancy.pk %}">{{ vacancy.name }}</a></h1>
-	            <p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
-	            <p>Зарплата: {{ vacancy.salary }}</p>
-                <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.owner }}</a>
-                {% if is_authenticated and not is_organisation %}
-                    {% if '2' in '1,2,3' %}
-                         <img id ='save' src="http://imagestun.com/hosting/prev/star3.png" height="22px" onclick = "favourite();" class="top-menu">  
+    	            <h1><a href="{% url 'vacancy_detail' pk=vacancy.pk %}">{{ vacancy.name }}</a></h1>
+    	            <p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
+    	            <p>Зарплата: {{ vacancy.salary }}</p>
+                    <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.owner }}</a>
+                    {% if is_authenticated and not is_organisation %}
+                        {% if '2' in '1,2,3' %}
+                             <img id ='save' src="http://imagestun.com/hosting/prev/star3.png" height="22px" onclick = "favourite();" class="top-menu">  
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-                <hr align="center" width="700px" size="2" color=grey />
-	            
-	    {% endfor %}
+                    {% if not forloop.last %}
+                        <hr align="center" width="700px" size="2" color=grey />
+                    {% endif %}   
+    	            
+    	    {% endfor %}
 	</div>
 
 {% endblock %}
