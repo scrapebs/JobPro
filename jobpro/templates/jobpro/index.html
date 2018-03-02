@@ -7,10 +7,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
 		<link rel="stylesheet" href="{% static 'css/jobpro.css' %}">
-
 	</head>
 	<body>
         <div id="wrapper">
@@ -24,27 +21,33 @@
 	                {% if user.account_type == 'OR' %} 
                             <div class = 'submenu'>
                                 <ul> 
-                                          <li><a href="{% url 'org_info_my' %}">Моя организация</a></li> 
-                                          <li><a href="{% url 'my_vacancies_list' %}">Мои вакансии</a></li> 
-                                          <li><a href="{% url 'cv_favourite_list' %}">Избранные резюме</a></li> 
-                                          <li><a href="{% url 'logout' %}">Выход</a></li> 
+                                    <li><a href="{% url 'org_info_my' %}">Моя организация</a></li> 
+                                    <li><a href="{% url 'my_vacancies_list' %}">Мои вакансии</a></li> 
+                                    <li><a href="{% url 'cv_favourite_list' %}">Избранные резюме</a></li> 
+                                    <li>
+                                       <form action="{% url 'my_logout' %}" method="post">
+                                          	{% csrf_token %}
+											<input type="submit" value="Выход">
+										</form>
+                                     </li> 
                                 </ul> 
                             </div>
                     {% else %}
                             <div class = 'submenu'>
                                 <ul> 
-                                          <li><a href="{% url 'cv_my' %}">Моё резюме</a></li> 
-                                          <li><a href="{% url 'vacancy_favourite_list' %}">Избранные вакансии</a></li> 
-                                          <li><a href="{% url 'logout' %}">Выход</a></li> 
+                                    <li><a href="{% url 'cv_my' %}">Моё резюме</a></li> 
+                                     <li><a href="{% url 'vacancy_favourite_list' %}">Избранные вакансии</a></li> 
+                                     <li>
+                                        <form action="{% url 'logout' %}" method="post">
+                                             {% csrf_token %}
+											 <input type="submit" value="Выход">
+										</form>
+                                    </li> 
                                 </ul> 
                             </div> 
                     {% endif %}
                 </div>
-
         </header>
-
-		<!-- Nav menu-->
-		
 
 		<!-- Banner -->
 			<section id="banner" style="background-image: url('https://s8.hostingkartinok.com/uploads/images/2018/02/7aedc8b17e55f51d2e26710ef21abfc9.jpg');">
@@ -56,7 +59,6 @@
 			</section>
 
 		<!-- Highlights -->
-			
 				<div class="inner">
 					<div class="highlights">
 							<section>
@@ -92,26 +94,18 @@
                     <div class="content">
                         <section>
                             <h3>Job Pro</h3>
-                            <p>База вакансий и резюме. Функционал разделен в зависимости <br> 
-                            от вашей роли.Оставляйте резюме и откликайтесь на вакансии<br> 
-                            или рассматривайте резюме и размещайте свои вакансии.
+                            <p>База вакансий и резюме. Функционал разделен в зависимости от вашей роли. <br>
+                            	Оставляйте резюме и откликайтесь на вакансии или рассматривайте резюме и размещайте свои вакансии.</p>
                         </section>
                         <section>
-                            <h4>Джанго проект лежит тут</h4>
+                            <h4>Исходники</h4>
                             <ul class="plain">
                                 <li><a href="https://github.com/scrapebs" target="_blank"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-                            </ul>
-                        </section>
-                        <section>
-                            <h4>Другой проект</h4>
-                            <ul class="alt">
-                                <li><a href="https://dotarate.ru" target="_blank">Сервис взаимодействующий со Steam</a></li>
                             </ul>
                         </section>
                     </div>
 
                 </div>
-            </footer>  
-			
+            </footer>  			
 	</body>
 </html>

@@ -34,17 +34,16 @@
     font-size: 16pt;
     margin-right: 10px;
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .vacancy {
 
-
-        color: #000000;
-
-
+    color: #000000;
     width: 1000px; /* Ширина слоя в пикселах */
     margin: 0 auto; /* Отступ слева и справа */
     padding-top: 40px;
+    padding-bottom: 2000px;
 
 }
 
@@ -239,7 +238,6 @@ h6 {
   line-height: 1.2;  }
 
 
-
 @media screen and (max-width: 736px) {
   h1 {
     font-size: 2.75rem;
@@ -314,7 +312,6 @@ code {
 
 hr {
   border-bottom-color: rgba(0, 0, 0, 0.25); }
-
 
 
 /* Form */
@@ -506,9 +503,6 @@ input[type="radio"]:focus + label:before {
 
 :-ms-input-placeholder {
   color: #bbbbbb !important; }
-
-/* List */
-
 
 /* Table */
 .table-wrapper {
@@ -773,7 +767,8 @@ html,body{
 /* Footer */
 #footer {
   width: 100%;
-  height: 17%;
+  min-height: 17%;
+  height: auto !important;
   background-color: #111111;
   color: rgba(255, 255, 255, 0.5);
 
@@ -802,7 +797,7 @@ html,body{
     display: -ms-flex;
     display: flex; }
     #footer .content section {
-      width: 25%; }
+      width: 50%; }
       #footer .content section:first-child {
         width: 50%;
         padding-right: 4rem; }
@@ -881,7 +876,6 @@ body {
     min-width: 320px; } }
 
 
-
 /* Main */
 #main .content {
   background: #ffffff;
@@ -940,6 +934,24 @@ body {
     padding: 0px 0px 0px 0px;
     margin: 0;
 }
+
+.submenu ul li form input
+{
+  border: none;
+  color: grey;
+  background: #e3e6e8;
+  color: black;
+  opacity: 0.9;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.submenu ul li form input:hover {  
+  color: grey;
+}
+
 
 .mainmenu
 {
@@ -1006,4 +1018,13 @@ body {
   width: 400px; /* Ширина слоя в пикселах */
   margin: 0 auto; /* Отступ слева и справа */
   padding-top: 40px;
+}
+
+.chevron-left {
+    color: #b3b3b3;
+    float: left;
+    font-size: 26pt;
+    padding-left: 70px;
+    padding-top: 10px;
+    cursor: pointer;
 }

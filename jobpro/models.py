@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
+#Extended UserManager
 class MyUserManager(BaseUserManager):
     def create_user(self, email, account_type, username, password=None):
         if not email:
@@ -17,15 +18,13 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             account_type=account_type,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-
     def create_superuser(self, email, account_type, username, password):
         user = self.create_user(
-        	username=username,
+            username=username,
             email=email,
             password=password,
             account_type=account_type,
@@ -34,7 +33,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+# Extended User Model
 class User(AbstractUser):
     EMPLOYEE = 'EM'
     ORGANISATION = 'OR'
@@ -55,7 +54,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS =['account_type', 'email']
 
     def __str__self(self):
-    	return self.username + '(' + self.account_type + ')'
+        return self.username + '(' + self.account_type + ')'
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -70,6 +69,7 @@ class Vacancy(models.Model):
     salary = models.IntegerField(default = 60000)
     actual = models.BooleanField(default = True)
     owner = models.ForeignKey(auth.get_user_model(), related_name='vacancies', on_delete=models.CASCADE, null=True)
+    org_info = models.ForeignKey('jobpro.OrgInfo', related_name='orginfo', on_delete=models.CASCADE, null=True)
     AVTO = 'AV'
     BANK = 'BA'
     SECURE = 'SE'
@@ -93,7 +93,7 @@ class Vacancy(models.Model):
                                       default=AVTO)
 
     def __str__(self):
-    	return self.name
+        return self.name
 
 
 class FavouriteVacancy(models.Model):
@@ -103,15 +103,15 @@ class FavouriteVacancy(models.Model):
     def __str__(self):
         return self.user.username + '->' + self.vacancy.name
 
-#class VacancyPreview(models.Model):
-#    owner =  models.ForeignKey(auth.get_user_model(), related_name = 'favourite', on_delete=models.CASCADE)
 
 class Cv(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    phone = models.CharField(max_length=40, null = True)
+    email = models.CharField(max_length=40, null = True)
     created_date = models.DateTimeField(blank = True, null = True)
     actual = models.BooleanField(default = True)
-    owner = models.ForeignKey(auth.get_user_model(), related_name='cv', on_delete=models.CASCADE, null = True)
+    owner = models.ForeignKey(auth.get_user_model(), related_name='cv', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return  self.name
@@ -133,7 +133,7 @@ class OrgInfo(models.Model):
     description = models.TextField()
     created_date = models.DateTimeField(blank = True, null = True)
     actual = models.BooleanField(default = True)
-    organisation = models.ForeignKey(auth.get_user_model(), related_name='info', on_delete=models.CASCADE, null = True)
+    organisation = models.OneToOneField(auth.get_user_model(), related_name='info', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return  self.name

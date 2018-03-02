@@ -2,14 +2,8 @@
 
 {% block content %}
 <div class="page-header">
-    {% if user.account_type == 'OR' %} 
-	    
-      
-                {% block menu %}    
-                {% endblock %}
-                <a href="{% url 'vacancy_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-
-        
+    {% if user.account_type == 'OR' %} 	         
+        <a href="{% url 'vacancy_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>      
     {% endif %}
     </div>
 	<div class="vacancy">
@@ -18,22 +12,15 @@
         {% else %}
             <h1>Все вакансии</h1>
         {% endif %}
-    		{% for vacancy in vacancies %}
-    	            
-
+    		{% for vacancy in vacancies %}	            
     	            <h1><a href="{% url 'vacancy_detail' pk=vacancy.pk %}">{{ vacancy.name }}</a></h1>
     	            <p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
     	            <p>Зарплата: {{ vacancy.salary }}</p>
-                    <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.owner }}</a>
-                    {% if is_authenticated and not is_organisation %}
-                        {% if '2' in '1,2,3' %}
-                             <img id ='save' src="http://imagestun.com/hosting/prev/star3.png" height="22px" onclick = "favourite();" class="top-menu">  
-                        {% endif %}
-                    {% endif %}
+                    <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.org_info }}</a>
+                       
                     {% if not forloop.last %}
                         <hr align="center" width="700px" size="2" color=grey />
-                    {% endif %}   
-    	            
+                    {% endif %}   	            
     	    {% endfor %}
 	</div>
 

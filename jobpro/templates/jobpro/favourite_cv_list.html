@@ -5,8 +5,7 @@
 	</div>
 	<div class="vacancy">
 		<h1>Избранные резюме</h1>
-		{% for favourite in favourite_cvs %}
-	            
+		{% for favourite in favourite_cvs %}            
 	            <h1><a href="{% url 'cv_detail' pk=favourite.cv.pk %}">{{ favourite.cv.name }}</a></h1>
 	            <p>{{ favourite.cv.description }}</p>   
 	            {% if not forloop.last %}

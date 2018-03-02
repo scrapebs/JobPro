@@ -1,23 +1,23 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import User, Vacancy, Cv, OrgInfo
-#from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
+from .models import User, Vacancy, Cv, OrgInfo
+
 class VacancyForm(forms.ModelForm):
 
-	class Meta:
-		model = Vacancy
-		fields = ('name', 'description', 'profession', 'salary')
+    class Meta:
+        model = Vacancy
+        fields = ('name', 'description', 'profession', 'salary')
 
 
 class CvForm(forms.ModelForm):
 
     class Meta:
         model = Cv
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'phone', 'email')
 
 
 class OrgInfoForm(forms.ModelForm):
@@ -48,6 +48,7 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
 
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
