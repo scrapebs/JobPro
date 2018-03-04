@@ -51,25 +51,32 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
 
     objects = MyUserManager()
-    REQUIRED_FIELDS =['account_type', 'email']
+    REQUIRED_FIELDS = ['account_type', 'email']
 
     def __str__self(self):
         return self.username + '(' + self.account_type + ')'
-
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
         
+class OrgInfo(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=150)
+    phone = models.CharField(max_length=40)
+    email = models.CharField(max_length=40)
+    description = models.TextField()
+    created_date = models.DateTimeField(blank=True, null=True)
+    actual = models.BooleanField(default=True)
+    organisation = models.OneToOneField(auth.get_user_model(), related_name='info', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return  self.name
 
 class Vacancy(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    created_date = models.DateTimeField(blank = True, null = True)
-    salary = models.IntegerField(default = 60000)
-    actual = models.BooleanField(default = True)
-    owner = models.ForeignKey(auth.get_user_model(), related_name='vacancies', on_delete=models.CASCADE, null=True)
-    org_info = models.ForeignKey('jobpro.OrgInfo', related_name='orginfo', on_delete=models.CASCADE, null=True)
+    created_date = models.DateTimeField(blank=True)
+    salary = models.IntegerField(default=60000)
+    actual = models.BooleanField(default=True)
+    owner = models.ForeignKey(auth.get_user_model(), related_name='vacancies', on_delete=models.CASCADE)
+    org_info = models.ForeignKey('jobpro.OrgInfo', related_name='orginfo', on_delete=models.CASCADE)
     AVTO = 'AV'
     BANK = 'BA'
     SECURE = 'SE'
@@ -95,45 +102,28 @@ class Vacancy(models.Model):
     def __str__(self):
         return self.name
 
-
 class FavouriteVacancy(models.Model):
-    user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_vacancy', on_delete=models.CASCADE)
+    user = models.ForeignKey(auth.get_user_model(), related_name='favourite_vacancy', on_delete=models.CASCADE)
     vacancy = models.ForeignKey('jobpro.Vacancy', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username + '->' + self.vacancy.name
 
-
 class Cv(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    phone = models.CharField(max_length=40, null = True)
-    email = models.CharField(max_length=40, null = True)
-    created_date = models.DateTimeField(blank = True, null = True)
-    actual = models.BooleanField(default = True)
-    owner = models.ForeignKey(auth.get_user_model(), related_name='cv', on_delete=models.CASCADE, null=True)
+    phone = models.CharField(max_length=40, blank=True)
+    email = models.CharField(max_length=40, blank=True)
+    created_date = models.DateTimeField(blank=True)
+    actual = models.BooleanField(default=True)
+    owner = models.ForeignKey(auth.get_user_model(), related_name='cv', on_delete=models.CASCADE)
 
     def __str__(self):
         return  self.name
         
-
 class FavouriteCv(models.Model):
-    user = models.ForeignKey(auth.get_user_model(), related_name = 'favourite_cv', on_delete=models.CASCADE)
+    user = models.ForeignKey(auth.get_user_model(), related_name='favourite_cv', on_delete=models.CASCADE)
     cv = models.ForeignKey('jobpro.Cv', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username + '->' + self.cv.name
-
-
-class OrgInfo(models.Model):
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=150)
-    phone = models.CharField(max_length=40)
-    email = models.CharField(max_length=40)
-    description = models.TextField()
-    created_date = models.DateTimeField(blank = True, null = True)
-    actual = models.BooleanField(default = True)
-    organisation = models.OneToOneField(auth.get_user_model(), related_name='info', on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return  self.name

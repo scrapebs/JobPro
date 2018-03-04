@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.db import transaction 
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-#from django.contrib.auth import views
+from django.views import generic
 
 from jobpro.models import User, Vacancy, Cv, FavouriteVacancy, FavouriteCv, OrgInfo  
 from jobpro.forms import VacancyForm, CvForm, OrgInfoForm
@@ -35,18 +35,14 @@ def index(request):
     else:
         return render(request, 'jobpro/index_logout.html', {}, )
 
-"""def post_logout(request):
-    if request.method == 'POST':
-        return HttpResponseRedirect(reverse('views.logout', kwargs={'next_page': '/'}))"""
-
 # List of all vacancies
 def vacancies_list(request):
     vacancies = Vacancy.objects.filter(actual=True).order_by('name')
-    favourite_vacancies = None
+    """favourite_vacancies is None
     if request.user.is_authenticated:
         if request.user.account_type=='EM':
-            favourite_vacancies = FavouriteVacancy.objects.filter(user = request.user)
-    return render(request, 'jobpro/vacancies_list.html', {'vacancies':vacancies, 'favourite_vacancies': favourite_vacancies}, )
+            favourite_vacancies = FavouriteVacancy.objects.filter(user = request.user)"""
+    return render(request, 'jobpro/vacancies_list.html', {'vacancies':vacancies}, )
 
 # Information of the selected vacancy
 def vacancy_detail(request, pk):
@@ -142,12 +138,18 @@ def org_vacancies_list(request, pk):
     vacancies = Vacancy.objects.filter(owner=pk)
     return render(request, 'jobpro/vacancies_list.html',{'vacancies': vacancies, 'description': 'Вакансии'}, )
 
-
 # List of CVs
 def cv_list(request):
     cvs = Cv.objects.filter(actual=True).order_by('pk') 
-    is_organisation = False
-    return render(request, 'jobpro/cv_list.html', {'cvs':cvs })
+    return render(request, 'jobpro/cv_list.html', {'cvs': cvs })
+
+# List of CVs by generic
+class CvView(generic.ListView):
+    template_name = 'jobpro/cv_list.html'
+    context_object_name = 'cvs_list'
+
+    def get_queryset(self):
+        Cv.objects.filter(actual=True).order_by('pk')
 
 # Information of the selected CV
 def cv_detail(request, pk):
@@ -167,7 +169,7 @@ def cv_detail(request, pk):
 @user_passes_test(is_employee)
 def cv_new(request):
     if Cv.objects.filter(owner = request.user).exists():
-        return HttpResponseRedirect(reverse('cv_list'))
+        return HttpResponseRedirect(reverse('cv_my'))
     else:
         if request.method == "POST":
             form = CvForm(request.POST)

@@ -24,6 +24,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 @sensitive_post_parameters()
@@ -112,7 +113,7 @@ def logout(request, next_page=None,
         return TemplateResponse(request, template_name, context)
 
     else:
-        return HttpResponse('')
+        return redirect('/')
 
 
 def logout_then_login(request, login_url=None, current_app=None, extra_context=None):

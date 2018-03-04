@@ -4,10 +4,9 @@ from django.urls import path
 from django.contrib.auth import views
 
 urlpatterns = [
-    url('admin/', admin.site.urls),    
-    url(r'^accounts/login/$', views.login, name='login'),
-    #url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    path('admin/', admin.site.urls),    
+    path('accounts/login/', views.login, name='login'),
     path('accounts/logout/', include('myauth.urls')),
-    url(r'', include('jobpro.urls')),
-    url(r'^accounts/', include('myregistration.backends.simple.urls')),
+    path('', include('jobpro.urls')),
+    path('accounts/', include('myregistration.backends.simple.urls')),
 ]
