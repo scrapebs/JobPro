@@ -47,10 +47,10 @@
 </div>
     <a href="{% url 'cv_list' %}" class='chevron-left'><span class="glyphicon glyphicon-chevron-left"></span></a>
     <div class="vacancy">
-    	<h1>{{ cv.name }}</h1>
+    	<h1>{{ cv.name }}</h1><br>
     	<p>Описание: <pre class="description">  {{ cv.description }}</pre></p>
-        <p>Контактный телефон : {{ cv.phone }}</p>
-        <p>Контактный email : {{ cv.email }}</p>
+        <p>Контактный телефон: <div class="description">{{ cv.phone }}</div></p>
+        <p>Контактный email: <div class="description">{{ cv.email }}</div></p>
     </div>
 
 {% endblock %}

@@ -52,7 +52,7 @@
     </div>
     <a href="{% url 'vacancies_list' %}" class='chevron-left'><span class="glyphicon glyphicon-chevron-left"></span></a>
     <div class="vacancy">
-    	<h1>{{ vacancy.name }}</h1>
+    	<h1>{{ vacancy.name }}</h1><br>
     	<p>Описание вакансии:<pre class="description">  {{ vacancy.description }}</pre></p>
     	<p>Зарплата: {{ vacancy.salary }}</p>
         <a href="{% url 'org_info_vacancy' owner_pk=vacancy.owner.pk %}" >Автор вакансии: {{ vacancy.org_info }}</a>

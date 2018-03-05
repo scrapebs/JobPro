@@ -7,10 +7,10 @@
         {% endif %}
     </div> 
     <div class="vacancy">
-    	<h1>{{ org_info.name }}</h1>
-    	<p>Адрес: {{ org_info.address }}</p>
-        <p>Контактный телефон: {{ org_info.phone }}</p>
-        <p>Контактный email: {{ org_info.email }}</p>
+    	<h1>{{ org_info.name }}</h1><br>
+    	<p>Адрес: <div class="description"> {{ org_info.address }}</div></p>
+        <p>Контактный телефон: <div class="description">{{ org_info.phone }}</div></p>
+        <p>Контактный email: <div class="description">{{ org_info.email }}</div></p>
         <p>Об организации: <pre class="description">  {{ org_info.description }}</pre></p>
         <a href="{% url 'org_vacancies_list' pk=org_info.organisation.pk  %}" >Все вакансии организации</a>
     </div>

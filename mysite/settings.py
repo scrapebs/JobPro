@@ -26,7 +26,7 @@ SECRET_KEY = 'k_h4t8y7sz5fv-5tp2dcd4m&$$_y3h7=ph@5ndrhuw0c109p7u'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1','rathernot.pythonanywhere.com', 'localhost', 'testserver' ]
+ALLOWED_HOSTS = ['127.0.0.1','jobpro.pythonanywhere.com', 'localhost', 'testserver' ]
 
 
 # Application definition
